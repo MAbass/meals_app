@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/categories_screen.dart';
+import 'package:meals_app/widgets/bottom_tabs_widget.dart';
+import 'package:meals_app/screens/category_meals_screen.dart';
+import 'package:meals_app/screens/filters_screen.dart';
+import 'package:meals_app/screens/meal_detail_screen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,28 +22,32 @@ class MyApp extends StatelessWidget {
         textTheme: ThemeData.light().textTheme.copyWith(
             bodyText1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
             bodyText2: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
-            subtitle1: TextStyle(fontSize: 24, fontFamily: "RobotoCondensed")),
+            subtitle1: TextStyle(
+                fontSize: 20,
+                fontFamily: "RobotoCondensed",
+                fontWeight: FontWeight.bold)),
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _HomePageState();
-  }
-}
-
-class _HomePageState extends State<StatefulWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Meals App"),
-      ),
-      body: CategoriesScreen(),
+      // home: MyHomePage(),
+      initialRoute: "/",
+      // by default, initial route is /
+      routes: {
+        "/": (ctx) => TabsBottomScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        FilterScreen.routeName: (ctx) => FilterScreen(),
+      },
+/*      onGenerateRoute: (arguments) {
+        print(arguments);
+        if (arguments.name == "/") {
+          return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+        } else if (arguments.name == CategoryMealsScreen.routeName) {
+          return MaterialPageRoute(builder: (ctx) => CategoryMealsScreen());
+        } else if (arguments.name == MealDetailScreen.routeName) {
+          return MaterialPageRoute(builder: (ctx) => MealDetailScreen());
+        } else {
+          return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+        }
+      },*/
     );
   }
 }

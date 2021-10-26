@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Category {
-  int id = 0;
+  String id;
   String title;
   Color color;
-  int increment = 0;
 
-  Category(this.title, this.color) {
-    this.id = ++increment;
-    this.title = title;
-    this.color = color;
-  }
+  Category(this.id, this.title, this.color);
 }
